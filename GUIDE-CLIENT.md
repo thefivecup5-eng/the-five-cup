@@ -103,7 +103,7 @@ Nommage strict : `poule_[element]_equipe[numero].png`
 ### Changer la date de l'événement
 Fichier : `src/components/CountdownTimer.astro` (ligne ~85)
 ```js
-const targetDate = new Date('2026-04-29T09:00:00');
+const targetDate = new Date('2026-06-24T09:00:00');
 ```
 
 ### Changer le lien d'inscription (partout d'un coup)
