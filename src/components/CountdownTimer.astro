@@ -39,7 +39,7 @@
   .countdown-section {
     background: var(--cream);
     padding: clamp(48px, 8vw, 80px) clamp(16px, 5vw, 40px);
-    overflow: hidden;
+    overflow-x: hidden; /* <-- MODIFIE CETTE LIGNE (ajoute juste le -x) */
   }
   .countdown-inner {
     max-width: 1000px;
@@ -71,15 +71,15 @@
     flex-wrap: nowrap;
     gap: 0;
     margin-bottom: clamp(20px, 4vw, 32px);
-    overflow: hidden;
+    /* overflow: hidden; <-- SUPPRIME CETTE LIGNE */
   }
 
   .count-block {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* fluid padding */
-    padding: 0 clamp(8px, 2.5vw, 28px);
+    /* J'ai réduit le max de 28px à 20px pour donner plus de place aux chiffres */
+    padding: 0 clamp(8px, 2vw, 20px); 
   }
 
   .count-val {
