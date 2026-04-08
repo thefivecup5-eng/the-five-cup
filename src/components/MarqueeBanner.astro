@@ -1,0 +1,48 @@
+---
+interface Props {
+  items?: string[];
+  bgColor?: string;
+  textColor?: string;
+  reverse?: boolean;
+}
+const {
+  items = ['THE 5 CUP', '29 AVRIL 2026', 'TOULOUSE', 'FOOTBALL', '15 ÉQUIPES', '3 POULES', '1 CHAMPION'],
+  bgColor = '#043927',
+  textColor = '#C9A84C',
+  reverse = false,
+} = Astro.props;
+const doubled = [...items, ...items];
+---
+<div class="marquee-wrapper" style={`background: ${bgColor};`}>
+  <div class={`marquee-track ${reverse ? 'reverse' : ''}`}>
+    {doubled.map((item) => (
+      <span class="marquee-item" style={`color: ${textColor};`}>
+        {item}<span class="marquee-sep" style={`color: ${textColor};`}>✦</span>
+      </span>
+    ))}
+  </div>
+</div>
+<style>
+  .marquee-wrapper {
+    overflow: hidden; width: 100%; padding: 14px 0;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .marquee-track {
+    display: flex; width: max-content;
+    animation: marqueeScroll 30s linear infinite;
+  }
+  .marquee-track.reverse { animation-direction: reverse; }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .marquee-item {
+    display: inline-flex; align-items: center;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 0.8rem; letter-spacing: 0.15em;
+    text-transform: uppercase; white-space: nowrap; padding: 0 8px;
+  }
+  .marquee-sep { margin: 0 16px; font-size: 0.6rem; opacity: 0.6; }
+  .marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+</style>

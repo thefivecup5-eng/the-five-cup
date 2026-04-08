@@ -1,0 +1,108 @@
+---
+import InnerPage from '../components/InnerPage.astro';
+
+const TICKET_LINK = "https://docs.google.com/forms/d/e/1FAIpQLScFuQRzO2CFAP7BWfzQZgbS5u1eVtF7u3ON7vSh_o6Rfl4WEQ/viewform";
+
+const faqs = [
+  {
+    q: "Comment s'inscrire ?",
+    a: `Remplissez le formulaire d'inscription en ligne via le bouton "Billetterie" en haut de page. Le tarif est de 12€ par personne.`,
+  },
+  {
+    q: "Quand et où se déroule l'événement ?",
+    a: "The 5 Cup aura lieu le 29 avril 2026 à l'UrbanSoccer de Toulouse Sept Deniers, 2 Rue de l'Égalité, 31200 Toulouse.",
+  },
+  {
+    q: "Combien de joueurs par équipe ?",
+    a: "Chaque équipe doit avoir au minimum 6 joueurs (pour jouer) et peut inscrire jusqu'à 10 joueurs au total, dont au minimum 1 joueuse.",
+  },
+  {
+    q: "Quel niveau est requis ?",
+    a: "The 5 Cup est ouvert à tous les niveaux ! L'événement est avant tout convivial, même si la compétition sera sérieuse. Amateurs comme confirmés sont les bienvenus.",
+  },
+  {
+    q: "Y a-t-il des arbitres ?",
+    a: "Oui, chaque match sera encadré par un arbitre désigné par l'organisation. Ses décisions sont définitives.",
+  },
+  {
+    q: "Que dois-je apporter ?",
+    a: "Vos chaussures de foot (crampons molles recommandées pour terrain synthétique), votre maillot d'équipe, et votre motivation !",
+  },
+  {
+    q: "Y a-t-il des prix à gagner ?",
+    a: "Oui ! Des trophées et récompenses seront remis aux équipes finalistes. Un prix fair-play pourra également être décerné.",
+  },
+  {
+    q: "Comment nous suivre sur les réseaux ?",
+    a: "Suivez-nous sur Instagram @the_five_cup pour toute l'actualité, les résultats en direct et les coulisses de l'événement.",
+  },
+];
+---
+
+<InnerPage title="FAQ" pageTitle='FAQ' subtitle="Les réponses à vos questions les plus fréquentes." tag="The 5 Cup">
+  <div class="faq-list">
+    {faqs.map((faq, i) => (
+      <div class="faq-item">
+        <button class="faq-question" aria-expanded="false">
+          <span class="faq-num">0{i + 1}</span>
+          <span class="faq-q-text">{faq.q}</span>
+          <span class="faq-arrow" aria-hidden="true">↓</span>
+        </button>
+        <div class="faq-answer" aria-hidden="true">
+          <p>{faq.a}</p>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="highlight-box">
+    <p>Vous n'avez pas trouvé votre réponse ? Contactez-nous à <a href="mailto:thefivecup5@gmail.com" style="color: var(--gold);">thefivecup5@gmail.com</a></p>
+  </div>
+</InnerPage>
+
+<style>
+  .faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+  .faq-item { background: rgba(255,255,255,0.03); border-left: 2px solid rgba(255,255,255,0.06); transition: border-color 0.2s; }
+  .faq-item.open { border-left-color: var(--bottle); }
+
+  .faq-question {
+    width: 100%; display: flex; align-items: center; gap: 16px;
+    padding: 20px 24px; background: none; border: none;
+    cursor: pointer; text-align: left;
+  }
+  .faq-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.7rem; color: rgba(245,240,232,0.2); min-width: 24px; flex-shrink: 0; }
+  .faq-q-text { flex: 1; font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(0.9rem,2vw,1rem); color: var(--cream); }
+  .faq-arrow { font-size: 1rem; color: var(--gold); transition: transform 0.3s ease; flex-shrink: 0; }
+  .faq-item.open .faq-arrow { transform: rotate(180deg); }
+
+  .faq-answer {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+    padding: 0 24px 0 64px;
+  }
+  .faq-item.open .faq-answer {
+    max-height: 300px;
+    padding: 0 24px 20px 64px;
+  }
+  .faq-answer p { font-size: 0.9rem; color: rgba(245,240,232,0.6); line-height: 1.7; margin: 0; }
+  .faq-answer p::before { display: none; }
+</style>
+
+<script>
+  const items = document.querySelectorAll('.faq-item');
+  items.forEach(item => {
+    const btn = item.querySelector('.faq-question')!;
+    btn.addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      items.forEach(i => { i.classList.remove('open'); i.querySelector('.faq-question')!.setAttribute('aria-expanded', 'false'); i.querySelector('.faq-answer')!.setAttribute('aria-hidden', 'true'); });
+      if (!isOpen) {
+        item.classList.add('open');
+        btn.setAttribute('aria-expanded', 'true');
+        item.querySelector('.faq-answer')!.setAttribute('aria-hidden', 'false');
+      }
+    });
+  });
+</script>

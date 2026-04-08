@@ -1,0 +1,263 @@
+---
+const poules = [
+  {
+    key: 'terre',
+    name: 'Poule Terre',
+    element: 'Terre',
+    icon: '🏔️',
+    letter: 'T',
+    traits: ['Force', 'Résilience', 'Détermination'],
+    teams: 5,
+    players: 30,
+    accent: '#C9A84C',
+    bg: '#1a1208',
+    logoPath: '/assets/poules/poule_terre.png',
+    teamLogos: [
+      '/assets/equipes/poule_terre_equipe1.png',
+      '/assets/equipes/poule_terre_equipe2.png',
+      '/assets/equipes/poule_terre_equipe3.png',
+      '/assets/equipes/poule_terre_equipe4.png',
+      '/assets/equipes/poule_terre_equipe5.png',
+    ],
+  },
+  {
+    key: 'air',
+    name: 'Poule Air',
+    element: 'Air',
+    icon: '💨',
+    letter: 'A',
+    traits: ['Légèreté', 'Fluidité', 'Vitesse'],
+    teams: 5,
+    players: 30,
+    accent: '#7EB8F7',
+    bg: '#0d1829',
+    logoPath: '/assets/poules/poule_air.png',
+    teamLogos: [
+      '/assets/equipes/poule_air_equipe1.png',
+      '/assets/equipes/poule_air_equipe2.png',
+      '/assets/equipes/poule_air_equipe3.png',
+      '/assets/equipes/poule_air_equipe4.png',
+      '/assets/equipes/poule_air_equipe5.png',
+    ],
+  },
+  {
+    key: 'eau',
+    name: 'Poule Eau',
+    element: 'Eau',
+    icon: '💧',
+    letter: 'E',
+    traits: ['Fluidité', 'Adaptabilité', 'Profondeur'],
+    teams: 5,
+    players: 30,
+    accent: '#4ECDC4',
+    bg: '#041a18',
+    logoPath: '/assets/poules/poule_eau.png',
+    teamLogos: [
+      '/assets/equipes/poule_eau_equipe1.png',
+      '/assets/equipes/poule_eau_equipe2.png',
+      '/assets/equipes/poule_eau_equipe3.png',
+      '/assets/equipes/poule_eau_equipe4.png',
+      '/assets/equipes/poule_eau_equipe5.png',
+    ],
+  },
+];
+
+const stats = [
+  { val: '15', label: 'Équipes' },
+  { val: '90', label: 'Joueurs' },
+  { val: '3', label: 'Poules' },
+  { val: '1', label: 'Champion' },
+];
+---
+
+<section class="poules-section">
+  <div class="poules-inner">
+
+    <div class="section-header reveal">
+      <span class="section-tag">Structure</span>
+      <h2 class="section-title">Trois Éléments,<br/>Un Championnat</h2>
+      <p class="section-desc">Chaque poule incarne une force élémentaire unique. Quel élément régnera en maître ?</p>
+    </div>
+
+    <div class="poules-grid">
+      {poules.map((poule, i) => (
+        <article
+          class="poule-card reveal"
+          style={`animation-delay: ${i * 0.15}s; --accent: ${poule.accent}; --card-bg: ${poule.bg};`}
+        >
+          <div class="card-bg-letter">{poule.letter}</div>
+
+          <div class="card-header">
+            <div class="card-poule-logo">
+              <img src={poule.logoPath} alt={`Logo ${poule.name}`} class="poule-logo-img" />
+            </div>
+            <span class="card-num">0{i + 1}</span>
+          </div>
+
+          <h3 class="card-name">{poule.name}</h3>
+          <p class="card-element">{poule.element}</p>
+
+          <div class="card-traits">
+            {poule.traits.map(trait => <span class="trait-tag">{trait}</span>)}
+          </div>
+
+          <!-- Team logos grid -->
+          <div class="team-logos-grid">
+            {poule.teamLogos.map((src, ti) => (
+              <div class="team-logo-wrap">
+                <img
+                  src={src}
+                  alt={`Équipe ${ti + 1} — ${poule.name}`}
+                  class="team-logo-img"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
+
+          <div class="card-stats">
+            <div class="card-stat">
+              <span class="card-stat-val">{poule.teams}</span>
+              <span class="card-stat-label">Équipes</span>
+            </div>
+            <div class="card-stat-sep"></div>
+            <div class="card-stat">
+              <span class="card-stat-val">{poule.players}</span>
+              <span class="card-stat-label">Joueurs</span>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="global-stats reveal">
+      {stats.map(s => (
+        <div class="global-stat">
+          <span class="global-stat-val">{s.val}</span>
+          <span class="global-stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .poules-section {
+    background: #0f0f0f;
+    padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
+    position: relative; overflow: hidden;
+  }
+  .poules-section::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(201,168,76,0.3), transparent);
+  }
+  .poules-inner { max-width: 1200px; margin: 0 auto; }
+
+  .section-header { text-align: center; margin-bottom: clamp(40px, 8vw, 80px); }
+  .section-tag {
+    display: inline-block;
+    font-family: 'Syne', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,168,76,0.3);
+    padding: 6px 14px; margin-bottom: 16px;
+  }
+  .section-title { font-size: clamp(1.8rem, 5vw, 3.5rem); color: var(--cream); line-height: 1.1; margin-bottom: 14px; }
+  .section-desc { font-size: clamp(0.85rem, 2vw, 1rem); color: rgba(245,240,232,0.5); line-height: 1.7; }
+
+  /* Cards */
+  .poules-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+
+  .poule-card {
+    background: var(--card-bg, #043927);
+    padding: clamp(24px, 4vw, 48px) clamp(18px, 3vw, 36px);
+    position: relative; overflow: hidden;
+    transition: transform 0.3s ease;
+  }
+  .poule-card:hover { transform: translateY(-6px); z-index: 2; }
+
+  .card-bg-letter {
+    position: absolute; right: -20px; bottom: -30px;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(5rem, 12vw, 10rem);
+    color: rgba(255,255,255,0.04);
+    line-height: 1; pointer-events: none; user-select: none;
+  }
+
+  .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+
+  .card-poule-logo {
+    width: clamp(56px, 10vw, 80px);
+    height: clamp(56px, 10vw, 80px);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.05);
+    padding: 8px;
+  }
+  .poule-logo-img { width: 100%; height: 100%; object-fit: contain; }
+
+  .card-num { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.75rem; letter-spacing: 0.15em; color: rgba(255,255,255,0.2); }
+
+  .card-name { font-size: clamp(1.1rem, 2.5vw, 1.6rem); color: #fff; margin-bottom: 4px; }
+  .card-element { font-family: 'Archivo', sans-serif; font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+
+  .card-traits { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 24px; }
+  .trait-tag {
+    font-family: 'Archivo', sans-serif; font-size: 0.65rem;
+    padding: 3px 8px; border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6);
+  }
+
+  /* Team logos */
+  .team-logos-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 4px;
+    margin-bottom: 20px;
+  }
+  .team-logo-wrap {
+    aspect-ratio: 1;
+    background: rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    padding: 6px;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+  .team-logo-wrap:hover { background: rgba(255,255,255,0.12); }
+  .team-logo-img { width: 100%; height: 100%; object-fit: contain; }
+
+  .card-stats { display: flex; align-items: center; gap: 16px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .card-stat { display: flex; flex-direction: column; }
+  .card-stat-val { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 1.4rem; color: var(--accent); }
+  .card-stat-label { font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-top: 2px; }
+  .card-stat-sep { width: 1px; height: 30px; background: rgba(255,255,255,0.1); }
+
+  /* Global stats */
+  .global-stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: var(--bottle);
+  }
+  .global-stat {
+    padding: clamp(24px, 4vw, 40px) clamp(16px, 3vw, 32px);
+    text-align: center;
+    border-right: 1px solid rgba(255,255,255,0.08);
+    transition: background 0.2s;
+  }
+  .global-stat:last-child { border-right: none; }
+  .global-stat:hover { background: var(--bottle-light); }
+  .global-stat-val { display: block; font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(2rem, 5vw, 3rem); color: var(--gold); line-height: 1; margin-bottom: 8px; }
+  .global-stat-label { font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.5); }
+
+  @media (max-width: 900px) {
+    .poules-grid { grid-template-columns: 1fr; }
+    .global-stats { grid-template-columns: repeat(2, 1fr); }
+    .global-stat { border-bottom: 1px solid rgba(255,255,255,0.08); }
+  }
+</style>

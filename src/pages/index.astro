@@ -1,0 +1,33 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import HeroSection from '../components/HeroSection.astro';
+import MarqueeBanner from '../components/MarqueeBanner.astro';
+import CountdownTimer from '../components/CountdownTimer.astro';
+import PoulesSection from '../components/PoulesSection.astro';
+import CTASection from '../components/CTASection.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="The 5 Cup — Compétition de Football Toulouse 2026">
+  <Header />
+  <main>
+    <HeroSection />
+    <MarqueeBanner />
+    <CountdownTimer />
+    <MarqueeBanner
+      reverse={true}
+      items={['POULE TERRE', 'POULE AIR', 'POULE EAU', 'FORCE', 'RÉSILIENCE', 'FLUIDITÉ', 'VITESSE']}
+      bgColor="#0a0a0a"
+      textColor="rgba(245,240,232,0.3)"
+    />
+    <PoulesSection />
+    <MarqueeBanner
+      items={['INSCRIPTIONS OUVERTES', '12€ PAR PERSONNE', 'PLACES LIMITÉES', 'INSCRIVEZ-VOUS', 'THE 5 CUP 2026']}
+      bgColor="#043927"
+      textColor="#C9A84C"
+    />
+    <CTASection />
+  </main>
+  <Footer />
+</Layout>

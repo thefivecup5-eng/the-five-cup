@@ -1,0 +1,166 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MarqueeBanner from '../components/MarqueeBanner.astro';
+import Footer from '../components/Footer.astro';
+
+const poules = [
+  {
+    name: 'Poule Terre',
+    icon: '🏔️',
+    accent: '#C9A84C',
+    bg: '#1a1208',
+    logoPath: '/assets/poules/poule_terre.png',
+    teams: [
+      { name: 'Équipe 1', logo: '/assets/equipes/poule_terre_equipe1.png' },
+      { name: 'Équipe 2', logo: '/assets/equipes/poule_terre_equipe2.png' },
+      { name: 'Équipe 3', logo: '/assets/equipes/poule_terre_equipe3.png' },
+      { name: 'Équipe 4', logo: '/assets/equipes/poule_terre_equipe4.png' },
+      { name: 'Équipe 5', logo: '/assets/equipes/poule_terre_equipe5.png' },
+    ],
+  },
+  {
+    name: 'Poule Air',
+    icon: '💨',
+    accent: '#7EB8F7',
+    bg: '#0d1829',
+    logoPath: '/assets/poules/poule_air.png',
+    teams: [
+      { name: 'Équipe 6', logo: '/assets/equipes/poule_air_equipe1.png' },
+      { name: 'Équipe 7', logo: '/assets/equipes/poule_air_equipe2.png' },
+      { name: 'Équipe 8', logo: '/assets/equipes/poule_air_equipe3.png' },
+      { name: 'Équipe 9', logo: '/assets/equipes/poule_air_equipe4.png' },
+      { name: 'Équipe 10', logo: '/assets/equipes/poule_air_equipe5.png' },
+    ],
+  },
+  {
+    name: 'Poule Eau',
+    icon: '💧',
+    accent: '#4ECDC4',
+    bg: '#041a18',
+    logoPath: '/assets/poules/poule_eau.png',
+    teams: [
+      { name: 'Équipe 11', logo: '/assets/equipes/poule_eau_equipe1.png' },
+      { name: 'Équipe 12', logo: '/assets/equipes/poule_eau_equipe2.png' },
+      { name: 'Équipe 13', logo: '/assets/equipes/poule_eau_equipe3.png' },
+      { name: 'Équipe 14', logo: '/assets/equipes/poule_eau_equipe4.png' },
+      { name: 'Équipe 15', logo: '/assets/equipes/poule_eau_equipe5.png' },
+    ],
+  },
+];
+---
+
+<Layout title="Équipes — The 5 Cup">
+  <Header />
+  <main>
+    <section class="inner-hero">
+      <div class="inner-hero-content">
+        <span class="eyebrow">The 5 Cup 2026</span>
+        <h1 class="page-title">Les<br/><span class="gold">Équipes</span></h1>
+        <p class="page-sub">15 équipes réparties en 3 poules élémentaires. Découvrez les participants.</p>
+      </div>
+    </section>
+
+    <MarqueeBanner />
+
+    {poules.map(poule => (
+      <section class="poule-section" style={`--accent: ${poule.accent}; --bg: ${poule.bg};`}>
+        <div class="poule-section-inner">
+          <div class="poule-section-header reveal">
+            <div class="poule-logo-wrap">
+              <img src={poule.logoPath} alt={`Logo ${poule.name}`} class="poule-section-logo" />
+            </div>
+            <div>
+              <span class="poule-icon">{poule.icon}</span>
+              <h2 class="poule-section-title">{poule.name}</h2>
+            </div>
+          </div>
+
+          <div class="teams-grid">
+            {poule.teams.map((team, i) => (
+              <div class="team-card reveal" style={`animation-delay: ${i * 0.08}s`}>
+                <div class="team-card-logo">
+                  <img src={team.logo} alt={team.name} loading="lazy" />
+                </div>
+                <span class="team-card-name">{team.name}</span>
+                <span class="team-card-num" style={`color: ${poule.accent}`}>#{i + 1}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    ))}
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .inner-hero {
+    background: var(--bottle);
+    padding: 150px clamp(16px,4vw,40px) 80px;
+    overflow: hidden;
+  }
+  .inner-hero-content { max-width: 1200px; margin: 0 auto; }
+  .eyebrow { display: inline-block; font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 16px; }
+  .page-title { font-size: clamp(3rem, 10vw, 7rem); color: var(--cream); line-height: 0.92; }
+  .gold { color: var(--gold); }
+  .page-sub { font-size: clamp(0.85rem,2vw,1rem); color: rgba(245,240,232,0.6); line-height: 1.7; margin-top: 18px; max-width: 460px; }
+
+  .poule-section {
+    background: var(--bg, #0f0f0f);
+    padding: clamp(48px,8vw,80px) clamp(16px,4vw,40px);
+    border-bottom: 2px solid rgba(255,255,255,0.04);
+  }
+  .poule-section-inner { max-width: 1200px; margin: 0 auto; }
+
+  .poule-section-header {
+    display: flex; align-items: center; gap: 24px;
+    margin-bottom: clamp(28px,5vw,48px);
+    padding-bottom: 24px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .poule-logo-wrap {
+    width: 80px; height: 80px;
+    background: rgba(255,255,255,0.06);
+    display: flex; align-items: center; justify-content: center;
+    padding: 10px; flex-shrink: 0;
+  }
+  .poule-section-logo { width: 100%; height: 100%; object-fit: contain; }
+  .poule-icon { font-size: 1.5rem; display: block; margin-bottom: 4px; }
+  .poule-section-title { font-size: clamp(1.5rem,4vw,2.5rem); color: var(--cream); }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 2px;
+  }
+
+  .team-card {
+    background: rgba(255,255,255,0.04);
+    padding: clamp(16px,3vw,28px) clamp(12px,2vw,20px);
+    display: flex; flex-direction: column; align-items: center; gap: 12px;
+    transition: background 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .team-card:hover { background: rgba(255,255,255,0.08); transform: translateY(-4px); }
+
+  .team-card-logo {
+    width: clamp(64px,10vw,100px);
+    height: clamp(64px,10vw,100px);
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,0.05);
+    padding: 8px;
+  }
+  .team-card-logo img { width: 100%; height: 100%; object-fit: contain; }
+
+  .team-card-name { font-family: 'Syne', sans-serif; font-weight: 700; font-size: clamp(0.75rem,1.5vw,0.9rem); color: var(--cream); text-align: center; }
+  .team-card-num { font-family: 'Archivo', sans-serif; font-size: 0.7rem; letter-spacing: 0.1em; }
+
+  @media (max-width: 700px) {
+    .teams-grid { grid-template-columns: repeat(3, 1fr); }
+    .poule-section-header { flex-direction: column; align-items: flex-start; }
+  }
+  @media (max-width: 440px) {
+    .teams-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>

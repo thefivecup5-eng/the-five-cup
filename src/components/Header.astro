@@ -1,0 +1,240 @@
+---
+const TICKET_LINK = "https://docs.google.com/forms/d/e/1FAIpQLScFuQRzO2CFAP7BWfzQZgbS5u1eVtF7u3ON7vSh_o6Rfl4WEQ/viewform";
+const navLinks = [
+  { label: 'Accueil', href: '/' },
+  { label: 'Compétition', href: '/competition' },
+  { label: 'Règlement', href: '/rules' },
+  { label: 'Instagram', href: 'https://www.instagram.com/the_five_cup?igsh=aTN0NmFlcmc5eWVx', external: true },
+];
+---
+
+<header id="main-header">
+  <div class="header-inner">
+    <a href="/" class="logo-link" aria-label="The 5 Cup - Accueil">
+      <img src="/assets/logos-sans-fond/logo.png" alt="The 5 Cup Logo" class="logo-img" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Navigation principale">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="nav-link"
+          target={link.external ? '_blank' : undefined}
+          rel={link.external ? 'noopener noreferrer' : undefined}
+        >
+          {link.label}
+        </a>
+      ))}
+    </nav>
+
+    <a href={TICKET_LINK} target="_blank" rel="noopener noreferrer" class="btn btn-primary header-cta">
+      Billetterie
+    </a>
+
+    <button class="burger" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </button>
+  </div>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <nav class="mobile-nav">
+        {navLinks.map((link, i) => (
+          <a
+            href={link.href}
+            class="mobile-nav-link"
+            style={`animation-delay: ${i * 0.07}s`}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noopener noreferrer' : undefined}
+          >
+            <span class="mobile-nav-num">0{i + 1}</span>
+            {link.label}
+          </a>
+        ))}
+        <a
+          href={TICKET_LINK}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="mobile-nav-link mobile-cta"
+          style={`animation-delay: ${navLinks.length * 0.07}s`}
+        >
+          <span class="mobile-nav-num">→</span>
+          Billetterie
+        </a>
+      </nav>
+      <div class="mobile-menu-footer">
+        <a href="https://www.instagram.com/the_five_cup?igsh=aTN0NmFlcmc5eWVx" target="_blank" rel="noopener noreferrer" class="mobile-ig">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          @the_five_cup
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  #main-header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    /* Fond permanent pour la lisibilité */
+    background: rgba(4, 57, 39, 0.92);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 1px 0 rgba(255,255,255,0.07);
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  #main-header.scrolled {
+    background: rgba(4, 57, 39, 0.99);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.35);
+  }
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* Marge verticale augmentée */
+    padding: 20px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  .logo-link { display: flex; align-items: center; z-index: 1100; }
+  .logo-img { height: 52px; width: auto; object-fit: contain; }
+
+  .desktop-nav { display: flex; align-items: center; gap: 36px; }
+  .nav-link {
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+    color: rgba(245, 240, 232, 0.8);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 2px;
+    background: var(--gold);
+    transition: width 0.3s ease;
+  }
+  .nav-link:hover { color: #fff; }
+  .nav-link:hover::after { width: 100%; }
+
+  .header-cta { font-size: 0.85rem; padding: 10px 24px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* Burger */
+  .burger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px; height: 40px;
+    background: none; border: none;
+    cursor: pointer; z-index: 1100; padding: 4px;
+  }
+  .burger-line {
+    display: block;
+    width: 100%; height: 2px;
+    background: var(--cream);
+    transition: transform 0.35s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.35s ease, width 0.35s ease;
+    transform-origin: center;
+  }
+  .burger.open .burger-line:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+  .burger.open .burger-line:nth-child(2) { opacity: 0; width: 0; }
+  .burger.open .burger-line:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+  /* Mobile menu */
+  .mobile-menu {
+    position: fixed; inset: 0;
+    background: var(--bottle);
+    z-index: 1050;
+    display: flex; flex-direction: column; justify-content: center;
+    transform: translateX(100%);
+    transition: transform 0.45s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow: hidden;
+  }
+  .mobile-menu::before {
+    content: '5';
+    position: absolute;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: 40vw;
+    color: rgba(255,255,255,0.04);
+    right: -5vw; bottom: -5vw;
+    line-height: 1; pointer-events: none;
+  }
+  .mobile-menu.open { transform: translateX(0); }
+
+  .mobile-menu-inner {
+    padding: 100px 48px 48px;
+    display: flex; flex-direction: column;
+    height: 100%; justify-content: space-between;
+  }
+  .mobile-nav { display: flex; flex-direction: column; gap: 4px; }
+
+  .mobile-nav-link {
+    display: flex; align-items: center; gap: 20px;
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(1.8rem, 6vw, 3.5rem);
+    color: rgba(245, 240, 232, 0.7);
+    text-decoration: none;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    transition: color 0.2s, gap 0.2s;
+    opacity: 0; transform: translateX(-30px);
+  }
+  .mobile-menu.open .mobile-nav-link {
+    animation: slideInMenu 0.45s ease forwards;
+  }
+  @keyframes slideInMenu { to { opacity: 1; transform: translateX(0); } }
+  .mobile-nav-link:hover { color: #fff; gap: 28px; }
+  .mobile-cta { color: var(--gold) !important; border-bottom-color: rgba(201, 168, 76, 0.2) !important; }
+
+  .mobile-nav-num { font-size: 0.75rem; letter-spacing: 0.1em; opacity: 0.5; font-weight: 700; min-width: 24px; }
+
+  .mobile-menu-footer { display: flex; align-items: center; gap: 20px; }
+  .mobile-ig {
+    display: flex; align-items: center; gap: 8px;
+    color: rgba(245, 240, 232, 0.5);
+    text-decoration: none; font-size: 0.85rem;
+    transition: color 0.2s;
+  }
+  .mobile-ig:hover { color: var(--cream); }
+
+  @media (max-width: 768px) {
+    .desktop-nav, .header-cta { display: none; }
+    .burger { display: flex; }
+    .header-inner { padding: 16px 24px; }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('main-header');
+  const burgerBtn = document.getElementById('burger-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+  window.addEventListener('scroll', () => {
+    header?.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  function toggleMenu(open: boolean) {
+    burgerBtn?.classList.toggle('open', open);
+    mobileMenu?.classList.toggle('open', open);
+    burgerBtn?.setAttribute('aria-expanded', String(open));
+    mobileMenu?.setAttribute('aria-hidden', String(!open));
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  burgerBtn?.addEventListener('click', () => toggleMenu(!mobileMenu?.classList.contains('open')));
+  mobileLinks.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') toggleMenu(false); });
+</script>

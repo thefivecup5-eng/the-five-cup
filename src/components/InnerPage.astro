@@ -1,0 +1,70 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MarqueeBanner from '../components/MarqueeBanner.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  pageTitle: string;
+  subtitle?: string;
+  tag?: string;
+  metaTitle?: string;
+}
+const { title, pageTitle, subtitle, tag = 'The 5 Cup', metaTitle } = Astro.props;
+---
+
+<Layout title={metaTitle ?? `${title} — The 5 Cup`}>
+  <Header />
+  <main>
+    <section class="inner-hero">
+      <div class="inner-hero-content">
+        <span class="inner-eyebrow">{tag}</span>
+        <h1 class="inner-title" set:html={pageTitle} />
+        {subtitle && <p class="inner-sub">{subtitle}</p>}
+      </div>
+    </section>
+    <MarqueeBanner />
+    <section class="inner-body">
+      <div class="inner-body-content">
+        <slot />
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .inner-hero {
+    background: var(--bottle);
+    padding: 150px clamp(16px,4vw,40px) 80px;
+    position: relative; overflow: hidden;
+  }
+  .inner-hero::after {
+    content: '';
+    position: absolute; right: -10%; top: 50%; transform: translateY(-50%);
+    width: 50vw; height: 50vw; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.05);
+    pointer-events: none;
+  }
+  .inner-hero-content { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .inner-eyebrow { display: inline-block; font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 18px; }
+  .inner-title { font-size: clamp(2.8rem, 9vw, 7rem); line-height: 0.92; color: var(--cream); }
+  .inner-title :global(.gold) { color: var(--gold); }
+  .inner-sub { font-size: clamp(0.9rem, 2vw, 1.05rem); color: rgba(245,240,232,0.6); line-height: 1.7; margin-top: 20px; max-width: 500px; }
+
+  .inner-body { background: #0f0f0f; padding: 80px clamp(16px,4vw,40px); }
+  .inner-body-content { max-width: 900px; margin: 0 auto; }
+
+  /* Shared prose styles for inner pages */
+  .inner-body-content :global(h2) { font-size: clamp(1.4rem, 3vw, 2rem); color: var(--cream); margin: 48px 0 16px; }
+  .inner-body-content :global(h2:first-child) { margin-top: 0; }
+  .inner-body-content :global(h3) { font-size: clamp(1rem, 2vw, 1.3rem); color: var(--gold); margin: 32px 0 12px; }
+  .inner-body-content :global(p) { font-size: 0.95rem; line-height: 1.8; color: rgba(245,240,232,0.65); margin-bottom: 16px; }
+  .inner-body-content :global(ul) { list-style: none; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
+  .inner-body-content :global(li) { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: rgba(245,240,232,0.65); line-height: 1.6; }
+  .inner-body-content :global(li::before) { content: '→'; color: var(--gold); flex-shrink: 0; margin-top: 1px; font-size: 0.8rem; }
+  .inner-body-content :global(.divider) { height: 1px; background: rgba(255,255,255,0.06); margin: 48px 0; }
+  .inner-body-content :global(.highlight-box) { background: rgba(4,57,39,0.3); border-left: 3px solid var(--bottle); padding: 20px 24px; margin: 24px 0; }
+  .inner-body-content :global(.highlight-box p) { margin: 0; }
+</style>

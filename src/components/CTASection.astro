@@ -1,0 +1,110 @@
+---
+const TICKET_LINK = "https://docs.google.com/forms/d/e/1FAIpQLScFuQRzO2CFAP7BWfzQZgbS5u1eVtF7u3ON7vSh_o6Rfl4WEQ/viewform";
+---
+
+<section class="cta-section">
+  <div class="cta-bg-text">THE 5 CUP</div>
+  <div class="cta-inner reveal">
+    <span class="cta-tag">Inscriptions Ouvertes</span>
+    <h2 class="cta-title">Prêts à<br/>Concourir ?</h2>
+    <p class="cta-desc">Enregistrez votre équipe dès maintenant et rejoignez la compétition de football la plus intense de Toulouse.</p>
+
+    <!-- Prix mis en avant pour la conversion -->
+    <div class="cta-price-box">
+      <div class="price-item">
+        <span class="price-val">12€</span>
+        <span class="price-label">par joueur</span>
+      </div>
+      <div class="price-divider"></div>
+      <div class="price-item">
+        <span class="price-val">6</span>
+        <span class="price-label">joueurs min.</span>
+      </div>
+      <div class="price-divider"></div>
+      <div class="price-item">
+        <span class="price-val">10</span>
+        <span class="price-label">joueurs max.</span>
+      </div>
+    </div>
+
+    <div class="cta-actions">
+      <a href={TICKET_LINK} target="_blank" rel="noopener noreferrer" class="btn btn-gold">
+        Enregistrer votre équipe — 12€/pers
+      </a>
+      <a href="/competition" class="btn btn-outline">
+        Règlement & Infos
+      </a>
+    </div>
+    <p class="cta-note">📍 UrbanSoccer Toulouse — 2 Rue de l'Égalité, 31200 Toulouse</p>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    background: var(--bottle);
+    padding: clamp(60px, 10vw, 120px) clamp(16px, 4vw, 40px);
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-bg-text {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(3rem, 18vw, 14rem);
+    color: rgba(255,255,255,0.03); white-space: nowrap;
+    pointer-events: none; user-select: none; line-height: 1;
+  }
+  .cta-inner { position: relative; z-index: 2; max-width: 700px; margin: 0 auto; }
+  .cta-tag {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: 'Syne', sans-serif; font-size: 0.7rem;
+    letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px;
+  }
+  .cta-tag::before { content: ''; width: 20px; height: 1px; background: var(--gold); }
+  .cta-title { font-size: clamp(2.5rem, 8vw, 6rem); color: var(--cream); line-height: 0.95; margin-bottom: 24px; }
+  .cta-desc { font-size: clamp(0.85rem, 2vw, 1rem); color: rgba(245,240,232,0.65); line-height: 1.7; margin-bottom: 40px; max-width: 480px; margin-left: auto; margin-right: auto; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; margin-bottom: 32px; }
+  .cta-note { font-size: 0.8rem; color: rgba(245,240,232,0.4); }
+
+  /* Prix mis en avant */
+  .cta-price-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    border: 1px solid rgba(201,168,76,0.35);
+    margin: 0 auto 36px;
+    max-width: 420px;
+  }
+  .price-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 18px 12px;
+    gap: 4px;
+  }
+  .price-val {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.8rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .price-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.45);
+  }
+  .price-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(201,168,76,0.2);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 600px) {
+    .cta-actions { flex-direction: column; align-items: center; }
+    .btn { width: 100%; max-width: 340px; }
+  }
+</style>

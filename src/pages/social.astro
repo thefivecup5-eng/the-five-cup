@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import MarqueeBanner from '../components/MarqueeBanner.astro';
+import Footer from '../components/Footer.astro';
+
+const IG_LINK = "https://www.instagram.com/the_five_cup?igsh=aTN0NmFlcmc5eWVx";
+const IG_HANDLE = "@the_five_cup";
+---
+
+<Layout title="Instagram — The 5 Cup">
+  <Header />
+  <main>
+
+    <section class="social-hero">
+      <div class="social-hero-inner">
+        <span class="eyebrow">Suivez-nous</span>
+        <h1 class="social-title">On est sur<br/><span class="gold">Instagram</span></h1>
+        <p class="social-desc">Toute l'actualité de la compétition, les coulisses et les résultats en temps réel.</p>
+        <a href={IG_LINK} target="_blank" rel="noopener noreferrer" class="btn btn-primary ig-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+          </svg>
+          Suivre {IG_HANDLE}
+        </a>
+      </div>
+    </section>
+
+    <MarqueeBanner items={['INSTAGRAM', '@THE_FIVE_CUP', 'SUIVEZ-NOUS', 'ACTU EN DIRECT', 'COULISSES', 'RÉSULTATS']} />
+
+    <section class="social-content">
+      <div class="social-inner">
+        <div class="ig-embed-wrapper reveal">
+          <div class="ig-card">
+            <div class="ig-card-header">
+              <div class="ig-avatar">
+                <img src="/assets/logos-sans-fond/logo.png" alt="The 5 Cup" />
+              </div>
+              <div class="ig-handle-info">
+                <span class="ig-handle">{IG_HANDLE}</span>
+                <span class="ig-subtitle">The 5 Cup — Toulouse</span>
+              </div>
+              <a href={IG_LINK} target="_blank" rel="noopener noreferrer" class="btn btn-primary ig-follow-btn">
+                Suivre
+              </a>
+            </div>
+            <p class="ig-bio">
+              🏆 Compétition de football<br/>
+              📅 29 Avril 2026 — Toulouse Sept Deniers<br/>
+              ⚽ 3 poules · 15 équipes · 1 champion
+            </p>
+          </div>
+          <p class="ig-hint">
+            Rendez-vous sur Instagram pour voir nos dernières publications, stories et coulisses de la compétition.
+          </p>
+          <a href={IG_LINK} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+            Voir le profil Instagram →
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</Layout>
+
+<style>
+  .social-hero {
+    background: var(--bottle);
+    padding: clamp(130px,15vw,160px) clamp(16px,4vw,40px) clamp(60px,8vw,100px);
+    position: relative; overflow: hidden;
+  }
+  .social-hero::before {
+    content: 'IG';
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    font-family: 'Syne', sans-serif; font-weight: 800;
+    font-size: clamp(12rem, 30vw, 30rem);
+    color: rgba(255,255,255,0.03); pointer-events: none; line-height: 1;
+  }
+  .social-hero-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
+  .eyebrow { display: inline-block; font-family: 'Syne', sans-serif; font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(245,240,232,0.4); margin-bottom: 16px; }
+  .social-title { font-size: clamp(3rem, 10vw, 8rem); color: var(--cream); line-height: 0.9; margin-bottom: 20px; }
+  .gold { color: var(--gold); }
+  .social-desc { font-size: clamp(0.85rem,2vw,1rem); color: rgba(245,240,232,0.65); max-width: 400px; line-height: 1.7; margin-bottom: 32px; }
+  .ig-btn { display: inline-flex; align-items: center; gap: 10px; font-size: 0.9rem; }
+
+  .social-content { background: #0f0f0f; padding: clamp(60px,8vw,100px) clamp(16px,4vw,40px); }
+  .social-inner { max-width: 700px; margin: 0 auto; }
+  .ig-embed-wrapper { display: flex; flex-direction: column; align-items: center; gap: 28px; text-align: center; }
+
+  .ig-card { width: 100%; background: #141414; border: 1px solid rgba(255,255,255,0.08); padding: 28px; }
+  .ig-card-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .ig-avatar { width: 52px; height: 52px; background: var(--bottle); border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 8px; }
+  .ig-avatar img { width: 100%; height: 100%; object-fit: contain; }
+  .ig-handle-info { display: flex; flex-direction: column; flex: 1; text-align: left; }
+  .ig-handle { font-family: 'Syne', sans-serif; font-weight: 700; color: var(--cream); font-size: 1rem; }
+  .ig-subtitle { font-size: 0.75rem; color: rgba(245,240,232,0.4); margin-top: 2px; }
+  .ig-follow-btn { padding: 8px 18px; font-size: 0.8rem; flex-shrink: 0; }
+  .ig-bio { text-align: left; font-size: 0.9rem; color: rgba(245,240,232,0.65); line-height: 1.8; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); }
+  .ig-hint { font-size: 0.85rem; color: rgba(245,240,232,0.35); line-height: 1.7; max-width: 480px; }
+</style>
